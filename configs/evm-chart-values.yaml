@@ -1,0 +1,52 @@
+global:
+  useTTY: true
+  dev: true
+
+config:
+  sequencer:
+    chainId: astria
+    rpc: "http://host.docker.internal:26657"
+    grpc: "http://host.docker.internal:8080"
+  celestia:
+    rpc: "http://host.docker.internal:27050"
+    token: ""
+  blockscout:
+    enabled: false
+  faucet:
+    enabled: false
+
+  genesis:
+    bridgeAddresses:
+    - address: "edf770a8915cd3f70309c918c3d16671f59161e2"
+      startHeight: 1
+      assetDenom: "nria"
+      assetPrecision: 9
+
+resources:
+  conductor:
+    requests:
+      cpu: 0.01
+      memory: 1Mi
+    limits:
+      cpu: 0.1
+      memory: 20Mi
+  composer:
+    requests:
+      cpu: 0.01
+      memory: 1Mi
+    limits:
+      cpu: 0.1
+      memory: 20Mi
+  geth:
+    requests:
+      cpu: 0.25
+      memory: 256Mi
+    limits:
+      cpu: 2
+      memory: 1Gi
+
+celestia-node:
+  enabled: false
+
+storage:
+  enabled: false
