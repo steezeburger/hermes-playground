@@ -10,10 +10,3 @@ deploy-evm:
 
 delete-evm:
   helm uninstall evm-chain-chart -n astria-dev-cluster
-
-init-bridge-account:
-  #!/bin/sh
-  cd ~/code/astria/repos/astria-cli-go
-  just run sequencer bridge init astria \
-    --url http://localhost:26657 \
-    --keyfile /Users/jessesnyder/.astria/keyfiles/UTC--2024-05-09T19:29:48-06:00--edf770a8915cd3f70309c918c3d16671f59161e2
