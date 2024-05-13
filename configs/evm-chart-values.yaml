@@ -14,13 +14,14 @@ config:
     enabled: false
   faucet:
     enabled: false
-
-  genesis:
-    bridgeAddresses:
-    - address: "edf770a8915cd3f70309c918c3d16671f59161e2"
-      startHeight: 1
-      assetDenom: "nria"
-      assetPrecision: 9
+  rollup:
+    executionCommitLevel: 'SoftOnly'
+    genesis:
+      bridgeAddresses:
+      - bridgeAddress: "0xedf770a8915cd3f70309c918c3d16671f59161e2"
+        startHeight: 1
+        assetDenom: "transfer/channel-0/utia"
+        assetPrecision: 6
 
 resources:
   conductor:

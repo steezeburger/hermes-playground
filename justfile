@@ -1,6 +1,7 @@
 import 'build.justfile'
 import 'evm.justfile'
 import 'helpers.justfile'
+import 'tmux.justfile'
 
 logfilename := "initnode-$(date +%Y-%m-%d).log"
 
@@ -84,16 +85,20 @@ create-hermes-connection:
 create-hermes-channel:
   ./hermes/target/debug/hermes create channel --a-chain celestia-local --a-connection connection-0 --a-port transfer --b-port transfer
 
-# init hermes. creates clients, connection, channel
-init-hermes: create-hermes-clients create-hermes-connection create-hermes-channel query-hermes-channel
+# creates clients, connection, channel
+setup-hermes-ibc: create-hermes-clients create-hermes-connection create-hermes-channel query-hermes-channel
 
 # start-hermes
 start-hermes:
   ./hermes/target/debug/hermes start
 
+# init a bridge account on astria
 init-bridge-account:
   #!/bin/sh
   cd ~/code/astria/repos/astria-cli-go
   just run sequencer bridge init astria \
     --url http://localhost:26657 \
-    --keyfile /Users/jessesnyder/.astria/keyfiles/UTC--2024-05-09T19:29:48-06:00--edf770a8915cd3f70309c918c3d16671f59161e2
+    --keyfile /Users/jessesnyder/.astria/keyfiles/UTC--2024-05-09T19:29:48-06:00--edf770a8915cd3f70309c918c3d16671f59161e2 \
+    --chain-id astria \
+    --asset-id transfer/channel-0/utia \
+    --fee-asset-id nria

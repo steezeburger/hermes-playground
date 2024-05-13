@@ -1,5 +1,15 @@
 # just commands to aid in running the evm
 
+deploy-cluster:
+  #!/bin/sh
+  cd ~/code/astria/repos/astria/charts
+  just deploy-cluster
+
+delete-cluster:
+  #!/bin/sh
+  cd ~/code/astria/repos/astria/charts
+  just delete-all
+
 deploy-evm:
   #!/bin/sh
   cd ~/code/astria/repos/astria/charts
@@ -9,4 +19,5 @@ deploy-evm:
     -f ~/code/astria/projects/get-hermes-running/configs/evm-chart-values.yaml
 
 delete-evm:
+  rm -rf ~/.astriageth
   helm uninstall evm-chain-chart -n astria-dev-cluster
