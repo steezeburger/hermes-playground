@@ -33,6 +33,10 @@ tmux-hermes:
 tmux-attach:
   tmux attach-session -t {{SESSION_NAME}}
 
+tmux-kill:
+  tmux kill-session -t {{SESSION_NAME}} 2>/dev/null || true
+  ps aux | grep -v grep | grep -E 'composer|conductor|sequencer|cometbft|celestia|hermes' | awk '{print $2}' | xargs kill -9
+
 # Run all commands in tmux
 run-tmux:
   #!/bin/sh
