@@ -7,7 +7,7 @@ init-bridge-account:
   just run sequencer bridge init astria \
     --url http://localhost:26657 \
     --keyfile /Users/jessesnyder/.astria/keyfiles/UTC--2024-05-09T19:29:48-06:00--edf770a8915cd3f70309c918c3d16671f59161e2 \
-    --chain-id astria \
+    --sequencer-chain-id astria \
     --asset-id transfer/channel-0/utia \
     --fee-asset-id nria
 
@@ -21,6 +21,6 @@ bridge-lock-tokens:
     0x811b103446760C22b7386af8712d60AAF983F055 \
     --url http://localhost:26657 \
     --keyfile /Users/jessesnyder/.astria/keyfiles/UTC--2024-05-09T19:29:48-06:00--edf770a8915cd3f70309c918c3d16671f59161e2 \
-    --chain-id astria \
+    --sequencer-chain-id astria \
     --asset-id transfer/channel-0/utia \
     --fee-asset-id nria
