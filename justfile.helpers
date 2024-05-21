@@ -43,6 +43,18 @@ get-astria-balance address:
         --sequencer-url=http://localhost:26657
 
 # bridge funds from celestia to astria
+bridge-c-2-a:
+  ./hermes/target/debug/hermes tx ft-transfer \
+    --timeout-seconds 1000 \
+    --dst-chain astria \
+    --src-chain celestia-local \
+    --src-port transfer \
+    --src-channel channel-0 \
+    --amount 9000000 \
+    --denom=utia \
+    --receiver edf770a8915cd3f70309c918c3d16671f59161e2 \
+
+# bridge funds from celestia to astria
 bridge-c-2-a-2-evm:
   ./hermes/target/debug/hermes tx ft-transfer \
     --timeout-seconds 1000 \

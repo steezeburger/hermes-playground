@@ -1,6 +1,7 @@
-archived
-
+# dependencies
 celestia-app
-hermes
 cometbft
+hermes
+
+# secrets
 configs/astria-wallet.json

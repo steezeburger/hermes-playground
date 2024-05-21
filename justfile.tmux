@@ -1,8 +1,7 @@
 SESSION_NAME := "bridgetest"
 
-# clean up data then kill and create a new tmux session
+# kill and create a new tmux session
 tmux-session:
-  just clean
   tmux kill-session -t {{SESSION_NAME}} 2>/dev/null || true
   tmux new-session -d -s {{SESSION_NAME}} -n 0
 
@@ -29,7 +28,6 @@ tmux-hermes:
     'just setup-hermes-ibc' C-m \
     'just start-hermes' C-m
 
-# attach to the tmux session
 tmux-attach:
   tmux attach-session -t {{SESSION_NAME}}
 
@@ -37,15 +35,16 @@ tmux-kill:
   tmux kill-session -t {{SESSION_NAME}} 2>/dev/null || true
   ps aux | grep -v grep | grep -E 'composer|conductor|sequencer|cometbft|celestia|hermes' | awk '{print $2}' | xargs kill -9
 
-# Run all commands in tmux
+# clean then run everything in tmux session. this might fail if sequencer is being built the first time.
 run-tmux:
   #!/bin/sh
+  just clean
   just tmux-session
   just tmux-celestia
-  sleep 3
-  just tmux-astria
   sleep 5
+  just tmux-astria
+  sleep 10
   just tmux-cometbft
-  sleep 3
+  sleep 5
   just tmux-hermes
   just tmux-attach

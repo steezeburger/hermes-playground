@@ -1,4 +1,4 @@
-# just commands to aid in running the evm
+# justfile to aid in running the evm
 
 deploy-cluster:
   #!/bin/sh

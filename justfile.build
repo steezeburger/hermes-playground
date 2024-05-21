@@ -1,24 +1,27 @@
-# justfile for building various things
+# justfile for building dependencies
 
-# download and build cometbft
-build-cometbft:
+# clone cometbft and checkout commit for v0.38.6
+get-cometbft:
   #!/bin/sh
   git clone https://github.com/cometbft/cometbft
   cd cometbft
-  # git checkout origin/v0.38.6
+  # checkout specific hash that is equivalent to old origin/v0.38.6 branch
   git checkout 1519562
-  export GOPATH=~/go
-  make install
 
-# download and untar celestia-appd
-build-celestia:
+# build cometbft
+build-cometbft:
+  cd cometbft && GOPATH=~/go make install
+
+# download and untar the celestia binary
+[macos]
+get-celestia:
   #!/bin/sh
   mkdir celestia-app
   cd celestia-app
   curl -LO https://github.com/celestiaorg/celestia-app/releases/download/v1.9.0/celestia-app_Darwin_arm64.tar.gz
   tar -zxvf celestia-app_Darwin_arm64.tar.gz
 
-# get hermes
+# clone hermes and checkout noot's branch
 get-hermes:
   git clone git@github.com:astriaorg/hermes.git
   cd hermes && git checkout noot/bump-deps

@@ -1,7 +1,8 @@
-import 'build.justfile'
-import 'evm.justfile'
-import 'helpers.justfile'
-import 'tmux.justfile'
+import 'justfile.bridging'
+import 'justfile.build'
+import 'justfile.evm'
+import 'justfile.helpers'
+import 'justfile.tmux'
 
 logfilename := "initnode-$(date +%Y-%m-%d).log"
 
@@ -91,14 +92,3 @@ setup-hermes-ibc: create-hermes-clients create-hermes-connection create-hermes-c
 # start-hermes
 start-hermes:
   ./hermes/target/debug/hermes start
-
-# init a bridge account on astria
-init-bridge-account:
-  #!/bin/sh
-  cd ~/code/astria/repos/astria-cli-go
-  just run sequencer bridge init astria \
-    --url http://localhost:26657 \
-    --keyfile /Users/jessesnyder/.astria/keyfiles/UTC--2024-05-09T19:29:48-06:00--edf770a8915cd3f70309c918c3d16671f59161e2 \
-    --chain-id astria \
-    --asset-id transfer/channel-0/utia \
-    --fee-asset-id nria
